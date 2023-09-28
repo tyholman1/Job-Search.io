@@ -13,10 +13,8 @@ export function login(credentials) {
 export function checkToken() {
   return sendRequest(`${BASE_URL}/check-token`);
 }
+//
 
-export function newJob() {
-  return sendRequest(`${BASE_URL}/new`, 'PUT');
-}
 
 /*--- Helper Functions ---*/
 

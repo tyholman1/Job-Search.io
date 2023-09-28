@@ -1,22 +1,15 @@
-import { checkToken } from "../../utilities/users-service";
-
-const OrderHistoryPage = () => {
-    const handleCheckToken = async () =>{
-        try {
-            const expDate = await checkToken()
-            alert(expDate.toLocaleString())
-        } catch (error) {
-            console.log(error)
-        }
-        
-    }
-
+export default function Dashboard(){
+   const job = this.props.job 
     return (
         <div>
-            <h1>OrderHistoryPage</h1>
-            <button onClick={handleCheckToken}>Check Log In Expiration</button>
+          Job Title{job.title}
+          Job Description{job.description}
+          Job Location{job.location}
+          Job Source{job.sourceName}
+          Job link{job.link}
+          Accepted{job.accepted}
+          <input type="submit" value='Submit New Job' />
         </div>
-    );
+    )
 }
 
-export default OrderHistoryPage;
