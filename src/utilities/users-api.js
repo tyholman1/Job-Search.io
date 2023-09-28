@@ -14,6 +14,10 @@ export function checkToken() {
   return sendRequest(`${BASE_URL}/check-token`);
 }
 
+export function newJob() {
+  return sendRequest(`${BASE_URL}/new`, 'PUT');
+}
+
 /*--- Helper Functions ---*/
 
 async function sendRequest(url, method = 'GET', payload = null) {

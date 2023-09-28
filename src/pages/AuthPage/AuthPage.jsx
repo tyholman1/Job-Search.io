@@ -1,10 +1,10 @@
 //useHistory to track the user history 
-import { useEffect, useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import SignUpForm from '../../components/SignUpForm/SignUpForm.jsx'
 import LoginForm from '../../components/LoginForm/LoginForm.jsx'
-import { Link, Route, Routes } from 'react-router-dom'
-import { set } from 'mongoose'
+
+import logo from '../../../pictures/js-logo.jpg'
 
 
 export default function AuthPage(props) {
@@ -21,27 +21,28 @@ const logInButton = () => {
 
     const signUpButton = () => {
     setShow(null)
-    navigate('/')
+    navigate('/welcome')
     }
 
 
     return (
       <div>
+        <img src={logo} alt="" />
         <h1>JobSearch.io</h1>
           {!show ?  
           <>
-          <SignUpForm/> 
+          <SignUpForm setUser={props.setUser}/> 
           
           <button onClick ={logInButton} type='submit'>Login</button>
           </>:
           <>
-          <LoginForm/> 
+          <LoginForm setUser={props.setUser}/> 
           {show ?
           <>
           <button onClick ={signUpButton} type='submit'>Sign In</button>
           </>
           :
-          <LoginForm />
+          <LoginForm setUser={props.setUser}/>
           }
           </>
        }

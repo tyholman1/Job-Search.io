@@ -15,7 +15,7 @@ function NavBar(props) {
     <nav>
       <Link to="/">Home</Link>
       &nbsp; | {" "}
-      <Link to="/list">Job List</Link>
+      <Link to="/dashboard">Job List</Link>
       &nbsp; | {" "}
       <Link to="/new">New Job</Link>
       <br/>
