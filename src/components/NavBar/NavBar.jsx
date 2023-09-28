@@ -13,11 +13,11 @@ function NavBar(props) {
 
   return (
     <nav>
-      <Link to="/job">Home</Link>
+      <Link to="/">Home</Link>
       &nbsp; | {" "}
-      <Link to="/job/list">Job List</Link>
+      <Link to="/list">Job List</Link>
       &nbsp; | {" "}
-      <Link to="/job/new">New Job</Link>
+      <Link to="/new">New Job</Link>
       <br/>
       <Link to="" onClick={handleLogOut}>Log Out</Link>
       <h1>Welcome, {props.user.name}</h1>

@@ -8,7 +8,6 @@ const jobSchema = new Schema({
     accepted: boolean,
     }, {
         timestamps: true,
-          // Even though it's hashed - don't serialize the password
 })
 
 module.exports = model("Job", jobSchema)

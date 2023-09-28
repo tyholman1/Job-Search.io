@@ -17,7 +17,13 @@ const userSchema = new Schema({
         trim: true,
         minlength: 3,
         required: true
-    }
+    },
+    job: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Job',
+      },
+    ],
 }, {
         timestamps: true,
           // Even though it's hashed - don't serialize the password
@@ -38,5 +44,7 @@ userSchema.pre('save', async function(next) {
     this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
     return next();
   });
+
+module.exports = model("User", userSchema)
 
 module.exports = model("User", userSchema)
