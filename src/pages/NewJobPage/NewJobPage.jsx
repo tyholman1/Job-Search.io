@@ -1,14 +1,16 @@
 import { useState } from 'react'
+import * as userServices from '../../utilities/users-service'
 
-
-export default function NewJobPage(){
+export default function NewJobPage({user}){
+    
     const [job, setJob] = useState({
         title:'',
         description:'',
         location: '',
         sourceName: '',
         link: '',
-        accepted: false 
+        accepted: false,
+        id: user._id 
     })
 
 
@@ -21,7 +23,7 @@ export default function NewJobPage(){
         evt.preventDefault()
         try {
             const jobData = {...job}
-            const newJob = await createJob(jobData)
+            const newJob = await userServices.createJob(jobData)
             setJob(newJob)
         } catch (error) {
             console.log(error)

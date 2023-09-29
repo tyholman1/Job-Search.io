@@ -4,7 +4,10 @@ const router = express.Router()
 const usersCtrl = require("../../controllers/api/users.cjs")
 const ensureLoggedIn = require("../../config/ensureLoggedIn.cjs")
 
+
 router.post("/", usersCtrl.create)
+
+router.put('/', usersCtrl.createJob)
 
 // /api/users/login
 router.post("/login", usersCtrl.login)

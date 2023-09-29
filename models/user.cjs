@@ -3,7 +3,19 @@ const SALT_ROUNDS = 6
 const bcrypt = require("bcrypt")
 
 
+const jobSchema = new Schema({
+  title: { type: String, required: true},
+  description: {type: String, required:true},
+  location: String,
+  sourceName: String,
+  link: String,
+  accepted: Boolean,
+  }, {
+      timestamps: true,
+})
+
 const userSchema = new Schema({
+  
     name: { type: String, required: true},
     email:{
         type:String,
@@ -18,12 +30,7 @@ const userSchema = new Schema({
         minlength: 3,
         required: true
     },
-    job: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Job',
-      },
-    ],
+    job: [jobSchema],
 }, {
         timestamps: true,
           // Even though it's hashed - don't serialize the password
@@ -36,6 +43,8 @@ const userSchema = new Schema({
         }
 })
 
+
+
 userSchema.pre('save', async function(next) {
     // 'this' is the user doc
     if (!this.isModified('password')) return next();
@@ -44,7 +53,5 @@ userSchema.pre('save', async function(next) {
     this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
     return next();
   });
-
-module.exports = model("User", userSchema)
 
 module.exports = model("User", userSchema)

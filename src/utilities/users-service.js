@@ -21,6 +21,12 @@ export async function signUp(userData) {
 
   }
 
+  export async function createJob(jobData){
+    const token = await usersAPI.createJob(jobData)
+    localStorage.setItem('token', token)
+    return getUser()
+  }
+
   export function getToken() {
     // getItem returns null if there's no string
     const token = localStorage.getItem('token');

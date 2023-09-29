@@ -5,7 +5,8 @@ const bcrypt = require("bcrypt")
 module.exports = {
     create,
     login, 
-    checkToken
+    checkToken,
+    createJob
 }
 
 async function create(req, res){
@@ -30,8 +31,16 @@ async function login(req, res){
     } catch (error) {
         console.log(error)
         res.status(400).json("Bad Login")
+    }
+}
 
-   
+async function createJob(req, res){
+    try {
+        const user= await User.findByIdAndUpdate(req.body.id, {$push: {job: req.body}}, {new: true})
+        const token = createJWT(user)
+        res.json(token)
+    } catch (error) {
+        console.log(error)
     }
 }
 
