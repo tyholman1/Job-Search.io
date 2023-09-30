@@ -6,7 +6,8 @@ module.exports = {
     create,
     login, 
     checkToken,
-    createJob
+    createJob,
+    getJob
 }
 
 async function create(req, res){
@@ -37,6 +38,16 @@ async function login(req, res){
 async function createJob(req, res){
     try {
         const user= await User.findByIdAndUpdate(req.body.id, {$push: {job: req.body}}, {new: true})
+        const token = createJWT(user)
+        res.json(token)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function getJob(req,res){
+    try {
+        const user = await User.findById(req.body.id, {title: req.body.title})
         const token = createJWT(user)
         res.json(token)
     } catch (error) {

@@ -27,6 +27,12 @@ export async function signUp(userData) {
     return getUser()
   }
 
+  export async function lastJob(jobData){
+    const token = await usersAPI.lastJob(jobData)
+    localStorage.setItem('token', token)
+    return getUser()
+}
+
   export function getToken() {
     // getItem returns null if there's no string
     const token = localStorage.getItem('token');
@@ -47,6 +53,8 @@ export async function signUp(userData) {
     // If there's a token, return the user in the payload, otherwise return null
     return token ? JSON.parse(atob(token.split('.')[1])).user : null;
     }
+
+    
 
     export function logOut() {
       localStorage.removeItem("token")

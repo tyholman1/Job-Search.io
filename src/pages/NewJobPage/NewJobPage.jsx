@@ -13,11 +13,6 @@ export default function NewJobPage({user}){
         accepted: false,
         id: user._id 
     })    
-    // const prevJob = lastJob(job)
-
-    // const postJost = (post) =>{
-    //     setJob(value)
-    // }
 
     function handleChange(evt){
         setJob({...job, [evt.target.name]: evt.target.value})
@@ -35,20 +30,31 @@ export default function NewJobPage({user}){
         }
     }
 
-    const lastJob = value =>{
-        const ref = useRef()
-        
-        useEffect(()=>{
-            ref.current = value //updates the ref to the latest value
-        }, [value])
-
-        return ref.current
+     async function getLastJob(){
+        try {
+            const jobData = {...job.title}
+            const prevJob = await userServices.getJob(jobData)
+            setJob(prevJob)
+        } catch (error) {
+            console.log(error)
+        }
     }
-    const prevJob = lastJob(JSON.stringify(job.title))
 
     return (
+        <div>{job.title}
         <div className="form-container">
-            <h2>{!job.title ? `This is use last entered job ${prevJob}` : 'No Jobs Added'}</h2>
+            <div>
+            {/* {!user.job.map((job, i)=>{
+                return <li key={i}>{job.title}</li>}) ? <h2>There is no jobs. Please create one</h2>: */}
+                {!user.job=== "" ? <h2>There are no jobs. Please create one using the form</h2>:
+            <h2>These are you last entered jobs {user.job.map((job, i)=>{
+                return <li key={i}>{job.title}</li>
+                
+            })}</h2>
+                }
+            
+            
+            </div>
             <form autoComplete="off" onSubmit={handleSubmit}>
                 <label>Job Title</label>
                 <input type="text" name="title" value={job.title} onChange={handleChange}/>
@@ -64,8 +70,8 @@ export default function NewJobPage({user}){
                 <input type="checkbox" name="accepted" onClick={()=>{setJob({...job, accepted: !job.accepted})}}/>
                 <button type="submit">Submit</button>
             </form>        
+    </div>
     </div> 
-    )
-
     
+    ) 
 }

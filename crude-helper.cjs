@@ -12,6 +12,14 @@ const db = require('./config/database.cjs');
 let user, item, category, order;
 let users, items, categories, orders;
 
+//getting the collection
+const coll = db.users
+
+//find code
+const cursor = coll.find()
+
+await cursor.forEach(job._id)
+
 setTimeout(() => {
   db.close();
 }, 5000);
