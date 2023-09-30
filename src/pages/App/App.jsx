@@ -24,7 +24,7 @@ function App() {
             <Routes>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/new" element={<NewJobPage user={user} />} />
-
+              
             </Routes>
           </>
         :

@@ -1,15 +1,26 @@
-export default function Dashboard(){
-   const job = this.props.job 
-    return (
-        <div>
-          Job Title{job.title}
-          Job Description{job.description}
-          Job Location{job.location}
-          Job Source{job.sourceName}
-          Job link{job.link}
-          Accepted{job.accepted}
-          <input type="submit" value='Submit New Job' />
-        </div>
-    )
-}
+import { useEffect, useState } from "react"
 
+export default function Dashboard({user}){
+   
+  const [job, setJob] = useState(
+    {
+      title: '',
+      description: '',
+      location: '',
+      sourceName: '',
+      link: '',
+      accepted: false,
+      // id: user._id 
+    }
+  )
+
+  return (
+    <div>
+      Job Title<br />
+      <div>
+        {job.title}
+      </div>
+    </div>
+  )
+
+}

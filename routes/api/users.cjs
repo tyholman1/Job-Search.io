@@ -7,7 +7,7 @@ const ensureLoggedIn = require("../../config/ensureLoggedIn.cjs")
 
 router.post("/", usersCtrl.create)
 
-router.put('/', usersCtrl.createJob)
+router.put('/dashboard', usersCtrl.createJob)
 
 // /api/users/login
 router.post("/login", usersCtrl.login)
