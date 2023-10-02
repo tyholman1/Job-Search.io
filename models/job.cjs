@@ -7,10 +7,10 @@ const jobSchema = new Schema({
     location: String,
     sourceName: String,
     link: String,
-    accepted: boolean,
+    accepted: Boolean,
     }, {
         timestamps: true,
 })
 
 // export const job = mongoose.model('Job', jobSchema);
-module.exports = model("Job", jobSchema)
+module.exports = mongoose.model("Job", jobSchema)

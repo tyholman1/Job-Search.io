@@ -7,7 +7,9 @@ module.exports = {
     login, 
     checkToken,
     createJob,
-    getJob
+    getJob,
+    deleteUser,
+    update
 }
 
 async function create(req, res){
@@ -53,6 +55,31 @@ async function getJob(req,res){
     } catch (error) {
         console.log(error)
     }
+}
+
+async function deleteUser(req, res) {
+    try {
+      const user = await User.findOneAndDelete({email: req.body.email});
+      if (!user) throw new Error("Email Not Found!");
+      res.json("Bye bye")
+  
+    } catch (err) {
+      console.log(err)
+      res.status(400).json("try again")
+    }
+  }
+
+async function update(req, res) {
+  try {
+    console.log(req.body)
+    const user = await User.findByIdAndUpdate(req.body.id, {name: req.body.name, email: req.body.email}, {new: true})
+    const token = createJWT(user);
+    res.json(token);
+
+  } catch (err) {
+    console.log(err)
+    res.status(400).json("Unable to update")
+  }
 }
 
 function checkToken(req, res){

@@ -35,13 +35,16 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use(require('./config/checkToken.cjs'))
 
 // Put API routes here, before the "catch all" route
-app.get('/test', (req, res) => {
-  res.send('You just hit a API route');
-});
+
 
 const userRouter = require("./routes/api/users.cjs")
 // Put API routes here, before the "catch all" route
 app.use('/api/users', userRouter);
+
+const jobRouter = require("./routes/api/jobs.cjs")
+// Put API routes here, before the "catch all" route
+app.use('/api/jobs', jobRouter);
+
 
 // The following "catch all" route (note the *) is necessary
 // to return the index.html on all non-AJAX requests

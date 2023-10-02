@@ -17,6 +17,14 @@ export function checkToken() {
 export function createJob(jobData){
   return sendRequest(BASE_URL, 'PUT', jobData)
 }
+
+export function deleteUser(credentials) {
+  return sendRequest(BASE_URL, 'DELETE', credentials)
+}
+
+export function update(credentials) {
+  return sendRequest(BASE_URL, "PUT", credentials)
+}
 //
 
 

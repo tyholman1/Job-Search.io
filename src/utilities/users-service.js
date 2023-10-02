@@ -27,10 +27,14 @@ export async function signUp(userData) {
     return getUser()
   }
 
-  export async function lastJob(jobData){
-    const token = await usersAPI.lastJob(jobData)
-    localStorage.setItem('token', token)
-    return getUser()
+
+
+export async function deleteUser(credentials) {
+  await usersAPI.deleteUser(credentials);
+}
+
+export async function updateUser(credentials) {
+  const updatedUser = await usersAPI.update(credentials);
 }
 
   export function getToken() {

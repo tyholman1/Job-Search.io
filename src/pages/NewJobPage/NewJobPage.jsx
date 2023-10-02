@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import * as userServices from '../../utilities/users-service'
 import { useNavigate } from 'react-router-dom'
+import NavBar from '../../components/NavBar/NavBar'
 
 export default function NewJobPage({user}){
     const navigate = useNavigate()
@@ -30,30 +31,18 @@ export default function NewJobPage({user}){
         }
     }
 
-     async function getLastJob(){
-        try {
-            const jobData = {...job.title}
-            const prevJob = await userServices.getJob(jobData)
-            setJob(prevJob)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
     return (
-        <div>{job.title}
+        <div>
         <div className="form-container">
             <div>
             {/* {!user.job.map((job, i)=>{
                 return <li key={i}>{job.title}</li>}) ? <h2>There is no jobs. Please create one</h2>: */}
-                {!user.job=== "" ? <h2>There are no jobs. Please create one using the form</h2>:
+                {!user.job  ? <h2>There are no jobs. Please create one using the form</h2>:
             <h2>These are you last entered jobs {user.job.map((job, i)=>{
                 return <li key={i}>{job.title}</li>
                 
             })}</h2>
-                }
-            
-            
+                }        
             </div>
             <form autoComplete="off" onSubmit={handleSubmit}>
                 <label>Job Title</label>
@@ -72,6 +61,5 @@ export default function NewJobPage({user}){
             </form>        
     </div>
     </div> 
-    
     ) 
 }
