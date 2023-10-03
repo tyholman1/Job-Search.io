@@ -10,13 +10,18 @@ router.post("/", usersCtrl.create)
 router.put('/dashboard', usersCtrl.createJob)
 
 // /api/users/login
-router.post("/login", usersCtrl.login)
+router.post("/dashboard", usersCtrl.login)
 
 router.get("/check-token", ensureLoggedIn, usersCtrl.checkToken)
 
-router.delete("/", usersCtrl.deleteUser);
+router.delete("/:id", usersCtrl.deleteUser);
 
 router.put("/", usersCtrl.update);
 
+router.get("/", usersCtrl.getJob)
+
+router.put("/dashboard/:id", usersCtrl.deleteJob)
+
+router.put("/dashboard/:id", usersCtrl.updateJob)
 
 module.exports = router

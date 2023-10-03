@@ -14,7 +14,6 @@ export async function signUp(userData) {
   }
   export async function login(credentials) {
     const token = await usersAPI.login(credentials)
-
     //persist the "token"
     localStorage.setItem('token', token);
     return getUser()
@@ -28,6 +27,11 @@ export async function signUp(userData) {
   }
 
 
+  export async function getJob(jobData){
+    const token = await usersAPI.getJob(jobData)
+    localStorage.setItem('token', token)
+    return getUser()
+  }
 
 export async function deleteUser(credentials) {
   await usersAPI.deleteUser(credentials);
@@ -58,7 +62,15 @@ export async function updateUser(credentials) {
     return token ? JSON.parse(atob(token.split('.')[1])).user : null;
     }
 
-    
+    export async function deleteJob(jobData, userId) {
+        await usersAPI.deleteJob(jobData, userId);
+      }
+
+      export async function updatedjob(jobData, userId) {
+        const updateJob = await usersAPI.updateJob(jobData, userId);
+        console.log(jobData,userId)
+        getUser()
+      }
 
     export function logOut() {
       localStorage.removeItem("token")

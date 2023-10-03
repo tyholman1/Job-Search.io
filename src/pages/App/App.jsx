@@ -6,12 +6,11 @@ import NewJobPage from "../NewJobPage/NewJobPage";
 import AuthPage from "../AuthPage/AuthPage.jsx"
 import NavBar from "../../components/NavBar/NavBar.jsx"
 import { getUser } from '../../utilities/users-service'
-import { getJob } from '../../utilities/jobs-service';
+
 import logo from '../../../pictures/js-logo.jpg'
 
 function App() {
   const [user, setUser] = useState(getUser())
-  const [job, setJob] = useState(getJob())
 
   //test3@test.com
 
@@ -22,10 +21,10 @@ function App() {
           <>
             <img src={logo} alt="" />
             {/* NavBar and Routes are only available when the user is logged in */}
-            <NavBar user={user} setUser={setUser} setJob={setJob}/>
+            <NavBar user={user} setUser={setUser} />
             <Routes>
-              <Route path="/dashboard" element={<Dashboard user={user} job={job} />} />
-              <Route path="/new" element={<NewJobPage user={user} job={job} />} />
+              <Route path="/dashboard" element={<Dashboard user={user} />} />
+              <Route path="/new" element={<NewJobPage user={user} />} />
 
             </Routes>
           </>

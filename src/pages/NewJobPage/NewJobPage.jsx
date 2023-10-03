@@ -25,7 +25,7 @@ export default function NewJobPage({user}){
             const jobData = {...job}
             const newJob = await userServices.createJob(jobData)
             setJob(newJob)
-            navigate("/")
+            navigate("/dashboard")
         } catch (error) {
             console.log(error)
         }

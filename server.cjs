@@ -41,9 +41,9 @@ const userRouter = require("./routes/api/users.cjs")
 // Put API routes here, before the "catch all" route
 app.use('/api/users', userRouter);
 
-const jobRouter = require("./routes/api/jobs.cjs")
-// Put API routes here, before the "catch all" route
-app.use('/api/jobs', jobRouter);
+// const jobRouter = require("./routes/api/jobs.cjs")
+// // Put API routes here, before the "catch all" route
+// app.use('/api/jobs', jobRouter);
 
 
 // The following "catch all" route (note the *) is necessary

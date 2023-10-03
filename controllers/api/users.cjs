@@ -9,7 +9,9 @@ module.exports = {
     createJob,
     getJob,
     deleteUser,
-    update
+    update,
+    deleteJob,
+    updateJob
 }
 
 async function create(req, res){
@@ -25,6 +27,7 @@ async function create(req, res){
 async function login(req, res){
     try {
         const user = await User.findOne({ email: req.body.email})
+        console.log(user)
         if(!user) throw new Error("User not found")
         //if we find the email, compare password
         const match = await bcrypt.compare(req.body.password, user.password)
@@ -57,6 +60,32 @@ async function getJob(req,res){
     }
 }
 
+async function deleteJob(req, res) {
+  console.log(req.params.id)
+  try {
+    const job = await User.findByIdAndUpdate(req.params.id, {$pull: { "job": req.body.title}});
+    if (!job) throw new Error("Job Not Found!");
+    res.json("Bye bye")
+
+  } catch (err) {
+    console.log(err)
+    res.status(400).json("try again")
+  }
+}
+
+async function updateJob(req, res) {
+  try {
+    const job = await User.findOneAndUpdate(req.params.id, { $set: {"user.job": req.body.title}}, {new: true});
+    console.log(job)
+    if (!job) throw new Error("Job Not Found!");
+    res.json("Bye bye")
+
+  } catch (err) {
+    console.log(err)
+    res.status(400).json("try again")
+  }
+}
+
 async function deleteUser(req, res) {
     try {
       const user = await User.findOneAndDelete({email: req.body.email});
@@ -68,6 +97,7 @@ async function deleteUser(req, res) {
       res.status(400).json("try again")
     }
   }
+  
 
 async function update(req, res) {
   try {

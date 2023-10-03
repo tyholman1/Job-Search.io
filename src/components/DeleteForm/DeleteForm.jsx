@@ -15,7 +15,7 @@ export default function DeleteForm({ user, setUser }) {
   const handleLogOut = () => {
     usersService.logOut();
     setUser(null);
-    redirect("/")
+    redirect("/dashboard")
   };
   async function handleSubmit(evt) {
     evt.preventDefault();

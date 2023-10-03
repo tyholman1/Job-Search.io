@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react"
-// import { useNavigate } from "react-router-dom"
-import * as jobServices from '../../utilities/jobs-service.js'
-import DeleteForm from '../../components/DeleteForm/DeleteForm'
-import UpdateUser from "../../components/UpdateForm/UpdateForm"
-import NavBar from "../../components/NavBar/NavBar"
+import DeleteJobForm from "../../components/DeleteJobForm/DeleteJobForm.jsx"
+import UpdateJob from "../../components/UpdateJobForm/UpdateJobForm.jsx"
+import UpdateForm from "../../components/UpdateForm/UpdateForm.jsx"
 
-export default function Dashboard({user},{job}, props){
+export default function Dashboard({user, job}, props){
   //  const navigate = useNavigate()
   const [getSetJob, setGetSetJob] = useState(
     {
@@ -15,45 +13,43 @@ export default function Dashboard({user},{job}, props){
       sourceName: '',
       link: '',
       accepted: false,
-      id: user.job._id 
+      id: user._id
     }
   )
       
-      useEffect(() =>{
-      const jobData = {...getSetJob}
-      const newJob = jobServices.getJob(jobData)
-       setGetSetJob(newJob)
-      },[])
-     
-   
-
-   
+      // useEffect(() =>{
+      // const jobData = {...getSetJob}
+      // const newJob = userServices.getJob(jobData)
+      //  setGetSetJob(newJob)
+      // },[setGetSetJob])  
+      
+      
   return (
     <div>
       
       Job Title<br />
-      <form action="" className="dashboard">
+      <form autoComplete ="off" className="dashboard">
                 <label>Job Title</label>
-                {user.job.map((job, i)=>{
-                return <li key={i}>{job.title}</li>
-              })}
-                <label>Job Decription</label>
-                {user.job.map((job, i)=>{
-                return <li key={i}>{job.description}</li>
-              })} 
+                {user.job && user.job.map((job, id)=>{
+                return <li key={id}> 
+                {job.title} </li>
+              })}            
                 <label>Job Location</label>
-                {user.job.map((job, i)=>{
-                return <li key={i}>{job.location}</li>
+                {user.job && user.job.map((job, k)=>{
+                return <li key={k}>{job.location}</li>
               })}                
                 <label>Job Source Name</label>
-                {user.job.map((job, i)=>{
-                return <li key={i}>{job.sourceName}</li>
+                {user.job && user.job.map((job, l)=>{
+                return <li key={l}>{job.sourceName}</li>
               })}
                 <label>Job link</label>
                 {getSetJob.link}
                 <label>Accepted</label>
-                {getSetJob.accepted}
+                {getSetJob.accepted} 
             </form>
+            <UpdateForm user={user}/>
+            <DeleteJobForm user={user} />
+            <UpdateJob user={user} />
     </div>
   )
 

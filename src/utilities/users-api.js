@@ -7,7 +7,7 @@ export function signUp(userData) {
 }
 
 export function login(credentials) {
-  return sendRequest(`${BASE_URL}/login`, 'POST', credentials);
+  return sendRequest(`${BASE_URL}/dashboard`, 'POST', credentials);
 }
 
 export function checkToken() {
@@ -25,9 +25,19 @@ export function deleteUser(credentials) {
 export function update(credentials) {
   return sendRequest(BASE_URL, "PUT", credentials)
 }
-//
 
+export function getJob(){
+  return sendRequest(`${BASE_URL}/dashboard`)
+}
 
+export function deleteJob(jobData, userId) {
+  console.log("whatever")
+  return sendRequest(`${BASE_URL}/dashboard/${userId}`, 'DELETE', jobData)
+}
+
+export function updateJob(jobData, userId) {
+  return sendRequest(`${BASE_URL}/dashboard/${userId}`, "PUT", jobData)
+}
 /*--- Helper Functions ---*/
 
 async function sendRequest(url, method = 'GET', payload = null) {
@@ -35,8 +45,10 @@ async function sendRequest(url, method = 'GET', payload = null) {
   // used to include a data payload, set headers, etc.
   const options = { method };
   if (payload) {
+    
     options.headers = { 'Content-Type': 'application/json' };
     options.body = JSON.stringify(payload);
+    console.log(payload)
   }
 
   const token = getToken();
